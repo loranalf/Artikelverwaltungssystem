@@ -16,10 +16,202 @@
  */
 package adresse;
 
+import exceptions.UngueltigeEingabeExceptions;
+import java.util.Objects;
+
 /**
- *
+ * Diese Klasse bildet die Adresse ab. Eine Adresse besteht aus der Strasse der
+ * Hausnummer, dem ort und der Postleitzahl.
  * @author Alfred Loran
+ * @version 1.00
  */
 public class Adresse {
+    private static int adressenAnzahl;
+    private int adressenNummer;
+    private String strasse;
+    private int hausNummer;
+    private String ort;
+    private String postLeitZahl;
     
+    /**
+     * Erzeugt ein Adresse - Objekt mit den übergebenen Parametern.
+     * @param strasse Die übergebene Strasse.
+     * @param hausNummer Die übergebene Hausnummer.
+     * @param ort Der übergebene Ort.
+     * @param postLeitZahl Die übergebene Postleitzahl.
+     * @throws UngueltigeEingabeExceptions Wird geworfen, wenn einer der Eingaben des Benutzers ungültig ist.
+     * @since 1.00
+     */
+    public Adresse(String strasse, int hausNummer, String ort, String postLeitZahl) throws UngueltigeEingabeExceptions {
+        setAdressenNummer(++adressenAnzahl);
+        setStrasse(strasse);
+        setHausNummer(hausNummer);
+        setPostLeitZahl(postLeitZahl);
+    }
+
+    /**
+     * Liefert die Adressennummer.
+     * @return die Adressennummer.
+     * @since 1.00
+     */
+    private int getAdressenNummer() {
+        return adressenNummer;
+    }
+
+    /**
+     * Setzt die Adressennnummer. Diese gilt als eindeutiger Identifikator für die Adresse.
+     * @param adressenNummer Die übergebene Adressnummer.
+     * @since 1.00
+     */
+    private void setAdressenNummer(int adressenNummer) {
+        this.adressenNummer = adressenNummer;
+    }
+
+    /**
+     * Liefert die Strasse.
+     * @return die Strasse.
+     * @since 1.00
+     */
+    public String getStrasse() {
+        return strasse;
+    }
+
+    /**
+     * Setzt die Strasse.
+     * @param strasse Die übergebene Strasse.
+     * @throws UngueltigeEingabeExceptions Wird geworfen, wenn die übergebene Strasse weniger als 4 Zeichen enthält.
+     * @since 1.00
+     */
+    private void setStrasse(String strasse) throws UngueltigeEingabeExceptions {
+        if (strasse == null) {
+            throw new NullPointerException("Keine Strasse vorhanden!");
+        } else if (strasse.length() < 4) {
+            throw new UngueltigeEingabeExceptions("Bitte geben Sie mindestens 4 Zeichen als Strasse ein!");
+        } else {
+            this.strasse = strasse;
+        }
+    }
+
+    /**
+     * Liefert die Hausnummer.
+     * @return die Hausnummer
+     * @since 1.00
+     */
+    public int getHausNummer() {
+        return hausNummer;
+    }
+
+    /**
+     * Setzt die Hausnummer.
+     * @param hausNummer Die übergebene Hausnummer.
+     * @throws UngueltigeEingabeExceptions Wird geworfen, wenn die Eingabe des benutzer kleiner oder gleich 0 ist.
+     * @since 1.00
+     */
+    private void setHausNummer(int hausNummer) throws UngueltigeEingabeExceptions {
+        if (hausNummer <= 0) {
+            throw new UngueltigeEingabeExceptions("Bitte geben Sie eine positive Zahl ein!");
+        } else {
+            this.hausNummer = hausNummer;
+        }
+    }
+
+    /**
+     * Liefert den Ort.
+     * @return den Ort
+     * @since 1.00
+     */
+    public String getOrt() {
+        return ort;
+    }
+
+    /**
+     * Setzt den Ort
+     * @param ort Der übergebene Ort.
+     * @throws UngueltigeEingabeExceptions Wird geworfen, wenn der Benutzer weniger als 3 Zeichen als ort eingibt.
+     * @since 1.00
+     */
+    public void setOrt(String ort) throws UngueltigeEingabeExceptions {
+        if (ort == null) {
+            throw new NullPointerException("Kein Ort vorhanden!");
+        } else if (ort.length() < 3) {
+            throw new UngueltigeEingabeExceptions("Bitte geben Sie mindestens 3 Zeichen als Ort ein!");
+        } else {
+            this.ort = ort;
+        }
+    }
+        
+    /**
+     * Liefert die Postleitzahl.
+     * @return die Postleitzahl.
+     * @since 1.00
+     */
+    public String getPostLeitZahl() {
+        return postLeitZahl;
+    }
+
+    /**
+     * Setzt die Postleitzahl.
+     * @param postLeitZahl Die übergebene Postleitzahl.
+     * @throws UngueltigeEingabeExceptions
+     * @since 1.00
+     */
+    private void setPostLeitZahl(String postLeitZahl) throws UngueltigeEingabeExceptions {
+        if (postLeitZahl == null) {
+            throw new NullPointerException("Keine Postleitzahl vorhanden!");
+        } else if (postLeitZahl.length() != 5) {
+            throw new UngueltigeEingabeExceptions("Bitte geben Sie eine 5-stellige Zahl ein!");
+        } else if (postLeitZahl.matches("\\D+")) {
+            throw new UngueltigeEingabeExceptions("Bitte geben Sie nur Zahlen ein!");
+        } else {
+            this.postLeitZahl = postLeitZahl;
+        }
+    }
+    
+    /**
+     * Liefert die Daten des Objektes.
+     * @return die Daten des Objektes
+     * @since 1.00
+     */
+    @Override
+    public String toString() {
+        return  "Adressnummer: " + getAdressenNummer() + "\n" +
+                "Strasse: " + getStrasse() + "\n" + 
+                "Hausnummer: " + getHausNummer() + "\n" +
+                "Ort: " + getOrt() + "\n" + 
+                "Postleitzahl: " + getPostLeitZahl();
+    }
+    
+    /**
+     * Vergleicht zwei Objekte.
+     * @param object Das zu vergleichende Objekt.
+     * @return true, wenn die Objekte gleich sind. 
+     *         false, wenn die Objekte ungleich sind.
+     * @since 1.00
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) {
+            throw new NullPointerException("kein Objekt zum Vergleichen vorhanden!");
+        } else if (!(object instanceof Adresse)) {
+            return false;
+        } else {
+            Adresse adresse = (Adresse)object;
+            return adresse.hashCode() == this.hashCode();
+        }
+    }
+
+    /**
+     * Generiert und liefert den hashCode des Objektes.
+     * @return den hashCode des Objektes
+     * @since 1.00
+     */
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + this.adressenNummer;
+        hash = 89 * hash + Objects.hashCode(this.strasse);
+        hash = 89 * hash + this.hausNummer;
+        hash = 89 * hash + Objects.hashCode(this.postLeitZahl);
+        return hash;
+    }        
 }
