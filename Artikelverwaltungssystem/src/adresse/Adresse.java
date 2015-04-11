@@ -16,7 +16,7 @@
  */
 package adresse;
 
-import exceptions.UngueltigeEingabeExceptions;
+import exceptions.UngueltigeEingabeException;
 import java.util.Objects;
 
 /**
@@ -39,10 +39,10 @@ public class Adresse {
      * @param hausNummer Die übergebene Hausnummer.
      * @param ort Der übergebene Ort.
      * @param postLeitZahl Die übergebene Postleitzahl.
-     * @throws UngueltigeEingabeExceptions Wird geworfen, wenn einer der Eingaben des Benutzers ungültig ist.
+     * @throws UngueltigeEingabeException Wird geworfen, wenn einer der Eingaben des Benutzers ungültig ist.
      * @since 1.00
      */
-    public Adresse(String strasse, int hausNummer, String ort, String postLeitZahl) throws UngueltigeEingabeExceptions {
+    public Adresse(String strasse, int hausNummer, String ort, String postLeitZahl) throws UngueltigeEingabeException {
         setAdressenNummer(++adressenAnzahl);
         setStrasse(strasse);
         setHausNummer(hausNummer);
@@ -79,14 +79,14 @@ public class Adresse {
     /**
      * Setzt die Strasse.
      * @param strasse Die übergebene Strasse.
-     * @throws UngueltigeEingabeExceptions Wird geworfen, wenn die übergebene Strasse weniger als 4 Zeichen enthält.
+     * @throws UngueltigeEingabeException Wird geworfen, wenn die übergebene Strasse weniger als 4 Zeichen enthält.
      * @since 1.00
      */
-    private void setStrasse(String strasse) throws UngueltigeEingabeExceptions {
+    private void setStrasse(String strasse) throws UngueltigeEingabeException {
         if (strasse == null) {
             throw new NullPointerException("Keine Strasse vorhanden!");
         } else if (strasse.length() < 4) {
-            throw new UngueltigeEingabeExceptions("Bitte geben Sie mindestens 4 Zeichen als Strasse ein!");
+            throw new UngueltigeEingabeException("Bitte geben Sie mindestens 4 Zeichen als Strasse ein!");
         } else {
             this.strasse = strasse;
         }
@@ -104,12 +104,12 @@ public class Adresse {
     /**
      * Setzt die Hausnummer.
      * @param hausNummer Die übergebene Hausnummer.
-     * @throws UngueltigeEingabeExceptions Wird geworfen, wenn die Eingabe des benutzer kleiner oder gleich 0 ist.
+     * @throws UngueltigeEingabeException Wird geworfen, wenn die Eingabe des benutzer kleiner oder gleich 0 ist.
      * @since 1.00
      */
-    private void setHausNummer(int hausNummer) throws UngueltigeEingabeExceptions {
+    private void setHausNummer(int hausNummer) throws UngueltigeEingabeException {
         if (hausNummer <= 0) {
-            throw new UngueltigeEingabeExceptions("Bitte geben Sie eine positive Zahl ein!");
+            throw new UngueltigeEingabeException("Bitte geben Sie eine positive Zahl ein!");
         } else {
             this.hausNummer = hausNummer;
         }
@@ -127,14 +127,14 @@ public class Adresse {
     /**
      * Setzt den Ort
      * @param ort Der übergebene Ort.
-     * @throws UngueltigeEingabeExceptions Wird geworfen, wenn der Benutzer weniger als 3 Zeichen als ort eingibt.
+     * @throws UngueltigeEingabeException Wird geworfen, wenn der Benutzer weniger als 3 Zeichen als ort eingibt.
      * @since 1.00
      */
-    public void setOrt(String ort) throws UngueltigeEingabeExceptions {
+    public void setOrt(String ort) throws UngueltigeEingabeException {
         if (ort == null) {
             throw new NullPointerException("Kein Ort vorhanden!");
         } else if (ort.length() < 3) {
-            throw new UngueltigeEingabeExceptions("Bitte geben Sie mindestens 3 Zeichen als Ort ein!");
+            throw new UngueltigeEingabeException("Bitte geben Sie mindestens 3 Zeichen als Ort ein!");
         } else {
             this.ort = ort;
         }
@@ -152,16 +152,16 @@ public class Adresse {
     /**
      * Setzt die Postleitzahl.
      * @param postLeitZahl Die übergebene Postleitzahl.
-     * @throws UngueltigeEingabeExceptions
+     * @throws UngueltigeEingabeException
      * @since 1.00
      */
-    private void setPostLeitZahl(String postLeitZahl) throws UngueltigeEingabeExceptions {
+    private void setPostLeitZahl(String postLeitZahl) throws UngueltigeEingabeException {
         if (postLeitZahl == null) {
             throw new NullPointerException("Keine Postleitzahl vorhanden!");
         } else if (postLeitZahl.length() != 5) {
-            throw new UngueltigeEingabeExceptions("Bitte geben Sie eine 5-stellige Zahl ein!");
-        } else if (postLeitZahl.matches("\\D+")) {
-            throw new UngueltigeEingabeExceptions("Bitte geben Sie nur Zahlen ein!");
+            throw new UngueltigeEingabeException("Bitte geben Sie eine 5-stellige Zahl ein!");
+        } else if (!(postLeitZahl.matches("\\d+"))) {
+            throw new UngueltigeEingabeException("Bitte geben Sie nur Zahlen ein!");
         } else {
             this.postLeitZahl = postLeitZahl;
         }

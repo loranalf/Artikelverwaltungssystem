@@ -21,21 +21,21 @@ package exceptions;
  * @author Alfred Loran
  * @version 1.00
  */
-public class UngueltigeEingabeExceptions extends Exception {
+public class UngueltigeEingabeException extends Exception {
     private static final long serialVersionUID = 6675145070741261894L;
     
     /**
      * Erzeugt ein UngueltigesEingabeException - Objekt.
      * @since 1.00
      */
-    public UngueltigeEingabeExceptions(){}
+    public UngueltigeEingabeException(){}
     
     /**
      * Erzeugt ein UngültigesEingabeException - Objekt mit dem übergebenem Parameter.
      * @param nachricht Die übergebene Nachricht.
      * @since 1.00
      */
-    public UngueltigeEingabeExceptions(String nachricht) {
+    public UngueltigeEingabeException(String nachricht) {
         super(nachricht);
     }        
 }
