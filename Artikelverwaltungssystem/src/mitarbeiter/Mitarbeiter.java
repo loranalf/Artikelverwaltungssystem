@@ -49,7 +49,7 @@ public class Mitarbeiter {
     public Mitarbeiter(String vorName, String zweitName, String nachName, String strasse, int hausNummer, String ort, String plz) throws UngueltigeEingabeException {
         setMitarbeiterNummer(++mitarbeiterAnzahl);
         setPersonenName(new Personenname(vorName, zweitName, nachName));
-        setAdresse(new Adresse(strasse, hausNummer, ort, zweitName));
+        setAdresse(new Adresse(strasse, hausNummer, ort, plz));
     }
 
     /**

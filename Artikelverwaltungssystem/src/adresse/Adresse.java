@@ -46,6 +46,7 @@ public class Adresse {
         setAdressenNummer(++adressenAnzahl);
         setStrasse(strasse);
         setHausNummer(hausNummer);
+        setOrt(ort);
         setPostLeitZahl(postLeitZahl);
     }
 
@@ -130,7 +131,7 @@ public class Adresse {
      * @throws UngueltigeEingabeException Wird geworfen, wenn der Benutzer weniger als 3 Zeichen als ort eingibt.
      * @since 1.00
      */
-    public void setOrt(String ort) throws UngueltigeEingabeException {
+    private void setOrt(String ort) throws UngueltigeEingabeException {
         if (ort == null) {
             throw new NullPointerException("Kein Ort vorhanden!");
         } else if (ort.length() < 3) {
