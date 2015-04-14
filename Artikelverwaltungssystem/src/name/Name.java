@@ -22,5 +22,74 @@ package name;
  * @version 1.00
  */
 public abstract class Name {
+    private static int anzahlNamen;
+    private int nameNummer;
     
+    /**
+     * Erzeugt ein Name - Objekt.
+     * @param nummer Die übergebene Nummer.
+     * @since 1.00
+     */
+    public Name(int nummer) {
+        setNummer(++anzahlNamen);
+    }
+    
+    /**
+     * Setzt die Nummer.
+     * @param nummer Die übergebene Nummer.
+     * @since 1.00
+     */
+    private void setNummer(int nummer) {
+        this.nameNummer = nummer;
+    }
+    
+    /**
+     * Liefert die Nummer.
+     * @return die Nummer
+     * @since 1.00
+     */
+    public int getNummer() {
+        return nameNummer;
+    }
+    
+    /**
+     * Liefert die Daten des Objektes.
+     * @return die Daten des Objektes
+     * @since 1.00
+     */
+    @Override
+    public String toString() {
+        return  "Namenummer: " + getNummer();
+    }
+    
+    /**
+     * Vergleicht zwei Objekte
+     * @param object Das zu vergleichende Objekt.
+     * @return true, Objekte sind gleich.
+     *         false, Objekte sind ungleich
+     * @since 1.00
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) {
+            throw new NullPointerException("kein Objekt zum Vergleichen vorhanden!");
+        } else if (!(object instanceof Name)) {
+            return false;
+        } else {
+            Name name = (Name)object;
+            return name.hashCode() == this.hashCode();
+        }
+    }
+
+    /**
+     * Generiert und liefert den hashCode des Objektes.
+     * @return den hashCode des Objektes.
+     * @since 1.00
+     */
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + this.nameNummer;
+        return hash;
+    }        
 }
