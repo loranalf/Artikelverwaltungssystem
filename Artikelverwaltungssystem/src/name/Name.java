@@ -16,22 +16,54 @@
  */
 package name;
 
+import exceptions.UngueltigeEingabeException;
+
 /**
  * Diese Klasse bildet den Namen ab. Hierbei handelt es sich um eine abstrakte Basisklasse.
  * @author Alfred Loran
  * @version 1.00
  */
-public abstract class Name {
+public class Name {
     private static int anzahlNamen;
     private int nameNummer;
+    private String vorName;
+    private String zweitName;
+    private String nachName;
+    private String firmenName;
     
     /**
      * Erzeugt ein Name - Objekt.
-     * @param nummer Die übergebene Nummer.
+     * @param vorName Der übergebene Vorname.
+     * @param zweitName Der übergebene Zweitname.
+     * @param nachName Der übergebene Nachname.
+     * @throws UngueltigeEingabeException Wird geworfen, wenn die Eingabe des Benutzersungültig ist.
      * @since 1.00
      */
-    public Name(int nummer) {
+    public Name(String vorName, String zweitName ,String nachName) throws UngueltigeEingabeException {
         setNummer(++anzahlNamen);
+        setVorName(vorName);
+        setZweitName(zweitName);
+        setNachName(nachName);
+    }
+    
+    /**
+     * Erzeugt ein Name - Objekt mit dem übergebenen Parameter.
+     * @param firmenName Der übergebene Firmenname.
+     * @throws UngueltigeEingabeException Wird geworfen, wenn die Eingabe des Benuters ungültig ist.
+     * @since 1.00
+     */
+    public Name (String firmenName) throws UngueltigeEingabeException {
+        setNummer(++anzahlNamen);
+        setFirmenName(firmenName);
+    }
+    
+    /**
+     * Liefert die Nummer.
+     * @return die Nummer
+     * @since 1.00
+     */
+    public int getNummer() {
+        return nameNummer;
     }
     
     /**
@@ -42,14 +74,107 @@ public abstract class Name {
     private void setNummer(int nummer) {
         this.nameNummer = nummer;
     }
-    
+            
     /**
-     * Liefert die Nummer.
-     * @return die Nummer
+     * Liefert den Vornamen.
+     * @return den Vornamen
      * @since 1.00
      */
-    public int getNummer() {
-        return nameNummer;
+    public String getVorName() {
+        return vorName;
+    }
+    
+    /**
+     * Setzt den Vornamen.
+     * @param vorName Den Vornamen.
+     * @throws UngueltigeEingabeException Wird geworfen, wenn die Eingabe des Benutzers nicht aus mindestens 2 Zeichen besteht.
+     * @since 1.00
+     */
+    private void setVorName(String vorName) throws UngueltigeEingabeException {
+        if (vorName == null) {
+            throw new NullPointerException("Kein Vorname vorhanden!");
+        } else if (vorName.length() < 2) {
+            throw new UngueltigeEingabeException("Bitte geben Sie mindestens 2 Zeichen als Vornamen ein!");
+        } else {
+            this.vorName = vorName;
+        }
+    }
+    
+    /**
+     * Liefert den Zweitnamen.
+     * @return den ZweitNamen
+     * @since 1.00
+     */
+    public String getZweitName() {
+        return zweitName;
+    }
+    
+    /**
+     * Setzt den Zweitnamen.
+     * @param zweitName Den übergebenen Zweitnamen.
+     * @since 1.00
+     */
+    private void setZweitName(String zweitName) {
+        this.zweitName = zweitName;
+    }
+    
+    /**
+     * Liefert den Nachnamen.
+     * @return den Nachnamen
+     * @since 1.00
+     */
+    public String getNachName() {
+        return nachName;
+    }
+    
+    /**
+     * Setzt den Nachnamen.
+     * @param nachName Der übergebene Nachname.
+     * @throws UngueltigeEingabeException Wird geworfen, wenn die Eingabe des Benutzers nicht mindestens 2 Zeichen enthält.
+     * @since 1.00
+     */
+    private void setNachName(String nachName) throws UngueltigeEingabeException {
+        if (nachName == null) {
+            throw new NullPointerException("Kein Nachname vorhanden!");
+        } else if (nachName.length() < 2) {
+            throw new UngueltigeEingabeException("Bitte geben Sie mindestens 2 Zeichen als Nachnamen ein!");
+        } else {
+            this.nachName = nachName;
+        }
+    }
+    
+    /**
+     * Liefert den Firmennamen.
+     * @return den Firmennamen
+     * @since 1.00
+     */
+    public String getFirmenName() {
+        return firmenName;
+    }
+    
+    /**
+     * Setzt den Firmennamen.
+     * @param firmenName Der übergebene Firmenname.
+     * @throws UngueltigeEingabeException Wird geworfen, wenn die Eingabe des benutzers nicht mindestnes 2 Zeichen enthält.
+     * @since 1.00
+     */
+    private void setFirmenName(String firmenName) throws UngueltigeEingabeException {
+        if (firmenName == null) {
+            throw new NullPointerException("Kein Firmenname vorhanden!");
+        } else if (firmenName.length() < 2) {
+            throw new UngueltigeEingabeException("Bitte geben Sie mindestens 2 Zeichen als Firmenname ein!");
+        } else {
+            this.firmenName = firmenName;
+        }
+    }
+    
+    private void eingabeInDatenbankPersonenName(String vorname, String zweitName, String nachName) {
+        
+    }
+    
+    
+    private void eingabeInDatenbankFirmenName(String firmenName) {
+        
     }
     
     /**

@@ -60,14 +60,16 @@ public class DatenbankVerbindung {
    
    /**
     * Diese Methode baut die Verbindung zur Datenbank auf.
+    * @return die Verbindung.
     * @since 1.00
     */
-   public void verbindungAufbauen() {        
+   public Connection verbindungAufbauen() {        
         try {
             con = (Connection) DriverManager.getConnection(URL, BENUTZER, PASSWORT);            
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         } 
+        return con;
     }
    
    /**

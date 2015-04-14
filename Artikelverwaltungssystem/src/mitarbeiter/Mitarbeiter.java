@@ -17,10 +17,13 @@
 package mitarbeiter;
 
 import adresse.Adresse;
+import datenbankverbindung.DatenbankVerbindung;
 import exceptions.UngueltigeEingabeException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Objects;
 import name.Name;
-import name.Personenname;
 
 /**
  * Diese Klasse bildet einen Mitarbeiter ab.
@@ -31,6 +34,9 @@ import name.Personenname;
 public class Mitarbeiter {
     private static int mitarbeiterAnzahl;
     private int mitarbeiterNummer;
+    private DatenbankVerbindung dbv = null;
+    private Connection conn = null;
+    private Statement stmt = null;
     private Name personenName;
     private Adresse adresse;
     
@@ -47,8 +53,9 @@ public class Mitarbeiter {
      * @since 1.00
      */
     public Mitarbeiter(String vorName, String zweitName, String nachName, String strasse, int hausNummer, String ort, String plz) throws UngueltigeEingabeException {
+        setDatenbankverbindung();
         setMitarbeiterNummer(++mitarbeiterAnzahl);
-        setPersonenName(new Personenname(vorName, zweitName, nachName));
+        setPersonenName(new Name(vorName, zweitName, nachName));
         setAdresse(new Adresse(strasse, hausNummer, ort, plz));
     }
 
@@ -85,9 +92,22 @@ public class Mitarbeiter {
      * @since 1.00
      */
     private void setPersonenName(Name personenName) {
-        this.personenName = personenName;
+        Statement stmt = (Statement) dbv.verbindungAufbauen();
+        try {
+            stmt.executeUpdate("insert into name(idname, vorname, zweitname, nachname) values (" + personenName.getNummer() + ",\"Alfred\",\"Elias\",\"Loran\");");
+        } catch(SQLException fehler) {
+            System.err.println(fehler.getMessage());
+        }
     }
 
+    /**
+     * Setzt die Datenbankverbindung.
+     * @since 1.00
+     */
+    private void setDatenbankverbindung() {
+        dbv= new DatenbankVerbindung();
+    }
+    
     /**
      * Liefert das Adresse - Objekt.
      * @return das Adresse - Objekt
