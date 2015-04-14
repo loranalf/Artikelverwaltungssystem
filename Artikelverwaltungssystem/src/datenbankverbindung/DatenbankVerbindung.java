@@ -38,7 +38,6 @@ public class DatenbankVerbindung {
     */
    public DatenbankVerbindung() {
        setDatenBankVerbindung(this);
-       verbindungAufbauen();
    }
    
    /**
@@ -63,7 +62,7 @@ public class DatenbankVerbindung {
     * Diese Methode baut die Verbindung zur Datenbank auf.
     * @since 1.00
     */
-   private void verbindungAufbauen() {        
+   public void verbindungAufbauen() {        
         try {
             con = (Connection) DriverManager.getConnection(URL, BENUTZER, PASSWORT);            
         } catch (SQLException ex) {
