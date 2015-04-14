@@ -113,7 +113,8 @@ public class Mitarbeiter {
      */
     @Override
     public String toString() {
-        return  getPersonenName().toString() + "\n" + 
+        return  "Mitarbeiternummer: " + getMitarbeiterNummer() + "\n" + 
+                getPersonenName().toString() + "\n" + 
                 getAdresse().toString();
     }
     
