@@ -62,7 +62,7 @@ public class Adresse {
      * @return die Adressennummer.
      * @since 1.00
      */
-    private int getAdressenNummer() {
+    public int getAdressenNummer() {
         return adressenNummer;
     }
 
