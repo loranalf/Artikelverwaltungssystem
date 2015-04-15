@@ -16,7 +16,11 @@
  */
 package adresse;
 
+import com.mysql.jdbc.Connection;
+import datenbankverbindung.DatenbankVerbindung;
 import exceptions.UngueltigeEingabeException;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Objects;
 
 /**
@@ -28,6 +32,7 @@ import java.util.Objects;
 public class Adresse {
     private static int adressenAnzahl;
     private int adressenNummer;
+    private DatenbankVerbindung dbv;
     private String strasse;
     private int hausNummer;
     private String ort;
@@ -43,11 +48,13 @@ public class Adresse {
      * @since 1.00
      */
     public Adresse(String strasse, int hausNummer, String ort, String postLeitZahl) throws UngueltigeEingabeException {
+        setDatenbankVerbindung();
         setAdressenNummer(++adressenAnzahl);
         setStrasse(strasse);
         setHausNummer(hausNummer);
         setOrt(ort);
         setPostLeitZahl(postLeitZahl);
+        eintragInDieDatenbank(strasse, hausNummer, ort, postLeitZahl);
     }
 
     /**
@@ -167,6 +174,26 @@ public class Adresse {
             this.postLeitZahl = postLeitZahl;
         }
     }
+    
+    /**
+     * Erzeugt die Datenbankverbindung.
+     * @since 1.00
+     */
+    private void setDatenbankVerbindung() {
+        dbv = new DatenbankVerbindung();
+    }
+    
+    private void eintragInDieDatenbank(String strasse, int hausNummer, String ort, String postLeitZahl) {
+        try {
+            Connection conn = dbv.verbindungAufbauen();
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("insert into adresse(idadresse,strasse,hausnummer,ort,postleitzahl) values (" + getAdressenNummer() + ",\"" + strasse + "\"," + hausNummer +",\"" + ort + "\",\"" + postLeitZahl + "\");");
+            dbv.verbindungTrennen();
+        } catch(SQLException fehler) {
+            System.err.println(fehler.getMessage());
+        }
+    }
+    
     
     /**
      * Liefert die Daten des Objektes.
