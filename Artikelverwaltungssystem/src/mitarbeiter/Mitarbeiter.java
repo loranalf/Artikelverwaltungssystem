@@ -55,6 +55,7 @@ public class Mitarbeiter {
         setMitarbeiterNummer(++mitarbeiterAnzahl);
         setPersonenName(new Name(vorName, zweitName, nachName));
         setAdresse(new Adresse(strasse, hausNummer, ort, plz));
+        eintragInDatenbank();
     }
 
     /**
@@ -124,6 +125,21 @@ public class Mitarbeiter {
             throw new NullPointerException("Keine Adresse vorhanden!");
         } else {
             this.adresse = adresse;
+        }
+    }
+    
+    /**
+     * Diese Methode dient dem Eintrag der Daten in die DAtenbank.
+     * @since 1.00
+     */
+    private void eintragInDatenbank() {
+        try {
+            Connection conn = dbv.verbindungAufbauen();
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("insert into mitarbeiter(idmitarbeiter,idname,idadresse) values (" + getMitarbeiterNummer() + "," + getPersonenName().getNameNummer() + "," + getAdresse().getAdressenNummer() + ");");
+            dbv.verbindungTrennen();
+        } catch(SQLException fehler) {
+            System.err.println(fehler.getMessage());
         }
     }
     
