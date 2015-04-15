@@ -24,6 +24,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Objects;
 import name.Name;
+import passwort.Passwort;
 
 /**
  * Diese Klasse bildet einen Mitarbeiter ab.
@@ -37,6 +38,7 @@ public class Mitarbeiter {
     private DatenbankVerbindung dbv = null;
     private Name personenName;
     private Adresse adresse;
+    private Passwort passwort;
     
     /**
      * Erzeugt ein Mitarbeiter - Objekt.
@@ -47,14 +49,16 @@ public class Mitarbeiter {
      * @param hausNummer Die übergebene Hausnummer.
      * @param ort Der übergebene Ort.
      * @param plz Die übergebene Postleitzahl.
+     * @param passwort Das übergebene Passwort
      * @throws UngueltigeEingabeException  Wird geworfen, wenn die Eingaben des Benutzers fehlerhaft sind.
      * @since 1.00
      */
-    public Mitarbeiter(String vorName, String zweitName, String nachName, String strasse, int hausNummer, String ort, String plz) throws UngueltigeEingabeException {
+    public Mitarbeiter(String vorName, String zweitName, String nachName, String strasse, int hausNummer, String ort, String plz, String passwort) throws UngueltigeEingabeException {
         setDatenbankverbindung();
         setMitarbeiterNummer(++mitarbeiterAnzahl);
         setPersonenName(new Name(vorName, zweitName, nachName));
         setAdresse(new Adresse(strasse, hausNummer, ort, plz));
+        setPaswort(new Passwort(passwort));
         eintragInDatenbank();
     }
 
@@ -136,10 +140,32 @@ public class Mitarbeiter {
         try {
             Connection conn = dbv.verbindungAufbauen();
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate("insert into mitarbeiter(idmitarbeiter,idname,idadresse) values (" + getMitarbeiterNummer() + "," + getPersonenName().getNameNummer() + "," + getAdresse().getAdressenNummer() + ");");
+            stmt.executeUpdate("insert into mitarbeiter(idmitarbeiter,idname,idadresse,idpasswort) values (" + getMitarbeiterNummer() + "," + getPersonenName().getNameNummer() + "," + getAdresse().getAdressenNummer() + "," + getPasswort().getPasswortNummer() + ");");
             dbv.verbindungTrennen();
         } catch(SQLException fehler) {
             System.err.println(fehler.getMessage());
+        }
+    }
+    
+    /**
+     * Liefert das Passwort - Objekt.
+     * @return das Passwort - Objekt
+     * @since 1.00
+     */
+    public Passwort getPasswort() {
+        return passwort;
+    }
+    
+    /**
+     * Setzt das Passwort - Objekt.
+     * @param passwort Das übergebene Objekt.
+     * @since 1.00
+     */
+    private void setPaswort(Passwort passwort) {
+        if (passwort == null) {
+            throw new NullPointerException("Kein Passwort vorhanden!");
+        } else {
+            this.passwort = passwort;
         }
     }
     
