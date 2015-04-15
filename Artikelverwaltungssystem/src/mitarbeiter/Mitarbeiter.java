@@ -35,8 +35,6 @@ public class Mitarbeiter {
     private static int mitarbeiterAnzahl;
     private int mitarbeiterNummer;
     private DatenbankVerbindung dbv = null;
-    private Connection conn = null;
-    private Statement stmt = null;
     private Name personenName;
     private Adresse adresse;
     
@@ -92,11 +90,10 @@ public class Mitarbeiter {
      * @since 1.00
      */
     private void setPersonenName(Name personenName) {
-        Statement stmt = (Statement) dbv.verbindungAufbauen();
-        try {
-            stmt.executeUpdate("insert into name(idname, vorname, zweitname, nachname) values (" + personenName.getNummer() + ",\"Alfred\",\"Elias\",\"Loran\");");
-        } catch(SQLException fehler) {
-            System.err.println(fehler.getMessage());
+        if (personenName == null) {
+            throw new NullPointerException("Kein Personenename vorhanden!");
+        } else {
+            this.personenName= personenName;
         }
     }
 
@@ -123,7 +120,11 @@ public class Mitarbeiter {
      * @since 1.00
      */
     private void setAdresse(Adresse adresse) {
-        this.adresse = adresse;
+        if (adresse == null) {
+            throw new NullPointerException("Keine Adresse vorhanden!");
+        } else {
+            this.adresse = adresse;
+        }
     }
     
     /**
