@@ -16,7 +16,11 @@
  */
 package name;
 
+import com.mysql.jdbc.Connection;
+import datenbankverbindung.DatenbankVerbindung;
 import exceptions.UngueltigeEingabeException;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Diese Klasse bildet den Namen ab. Hierbei handelt es sich um eine abstrakte Basisklasse.
@@ -26,6 +30,7 @@ import exceptions.UngueltigeEingabeException;
 public class Name {
     private static int anzahlNamen;
     private int nameNummer;
+    private DatenbankVerbindung dbv;
     private String vorName;
     private String zweitName;
     private String nachName;
@@ -40,10 +45,12 @@ public class Name {
      * @since 1.00
      */
     public Name(String vorName, String zweitName ,String nachName) throws UngueltigeEingabeException {
-        setNummer(++anzahlNamen);
+        setDatenBankverbindung();
+        setNameNummer(++anzahlNamen);
         setVorName(vorName);
         setZweitName(zweitName);
         setNachName(nachName);
+        eingabeInDatenbankPersonenName(vorName, zweitName, nachName);
     }
     
     /**
@@ -53,7 +60,7 @@ public class Name {
      * @since 1.00
      */
     public Name (String firmenName) throws UngueltigeEingabeException {
-        setNummer(++anzahlNamen);
+        setNameNummer(++anzahlNamen);
         setFirmenName(firmenName);
     }
     
@@ -62,7 +69,7 @@ public class Name {
      * @return die Nummer
      * @since 1.00
      */
-    public int getNummer() {
+    public int getNameNummer() {
         return nameNummer;
     }
     
@@ -71,7 +78,7 @@ public class Name {
      * @param nummer Die übergebene Nummer.
      * @since 1.00
      */
-    private void setNummer(int nummer) {
+    private void setNameNummer(int nummer) {
         this.nameNummer = nummer;
     }
             
@@ -168,13 +175,31 @@ public class Name {
         }
     }
     
+    /**
+     * Gibt die Personendaten in die Datenbank ein.
+     * @param vorname Der übergebene Vorname.
+     * @param zweitName Der übergebene Zweitname.
+     * @param nachName Derübergebene Nachname.
+     * @since 1.00
+     */
     private void eingabeInDatenbankPersonenName(String vorname, String zweitName, String nachName) {
-        
+        try {
+            Connection conn = dbv.verbindungAufbauen();
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("insert into name(idname, vorname, zweitname, nachname) values (" + getNameNummer() + ",\"" + getVorName() + "\",\"" + getZweitName() + "\",\"" + getNachName() + "\");");
+            dbv.verbindungTrennen();
+        } catch(SQLException fehler) {
+            System.err.println(fehler.getMessage());
+        } 
     }
     
     
     private void eingabeInDatenbankFirmenName(String firmenName) {
         
+    }
+    
+    private void setDatenBankverbindung() {
+        dbv = new DatenbankVerbindung();
     }
     
     /**
@@ -184,7 +209,7 @@ public class Name {
      */
     @Override
     public String toString() {
-        return  "Namenummer: " + getNummer();
+        return  "Namenummer: " + getNameNummer();
     }
     
     /**
