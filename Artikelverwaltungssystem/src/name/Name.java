@@ -21,7 +21,7 @@ import datenbankverbindung.DatenbankVerbindung;
 import exceptions.UngueltigeEingabeException;
 import java.sql.SQLException;
 import java.sql.Statement;
-import mitarbeiter.Mitarbeiter;
+import java.util.Objects;
 
 /**
  * Diese Klasse bildet den Namen ab. Hierbei handelt es sich um eine abstrakte Basisklasse.
@@ -35,8 +35,6 @@ public class Name {
     private String vorName;
     private String zweitName;
     private String nachName;
-    private String firmenName;
-    private Mitarbeiter mitarbeiter;
     
     /**
      * Erzeugt ein Name - Objekt.
@@ -58,15 +56,11 @@ public class Name {
     /**
      * Erzeugt ein Name - Objekt mit dem übergebenen Parameter.
      * @param firmenName Der übergebene Firmenname.
-     * @param mitarbeiter Der übergebene Mitarbeiter.
      * @throws UngueltigeEingabeException Wird geworfen, wenn die Eingabe des Benuters ungültig ist.
      * @since 1.00
      */
-    public Name (String firmenName, Mitarbeiter mitarbeiter) throws UngueltigeEingabeException {
+    public Name (String firmenName) throws UngueltigeEingabeException {
         setNameNummer(++anzahlNamen);
-        setFirmenName(firmenName);
-        setMitarbeiter(mitarbeiter);
-        eingabeInDatenbankFirmenName(firmenName);
     }
     
     /**
@@ -154,54 +148,7 @@ public class Name {
             this.nachName = nachName;
         }
     }
-    
-    /**
-     * Liefert den Firmennamen.
-     * @return den Firmennamen
-     * @since 1.00
-     */
-    public String getFirmenName() {
-        return firmenName;
-    }
-    
-    /**
-     * Setzt den Firmennamen.
-     * @param firmenName Der übergebene Firmenname.
-     * @throws UngueltigeEingabeException Wird geworfen, wenn die Eingabe des benutzers nicht mindestnes 2 Zeichen enthält.
-     * @since 1.00
-     */
-    private void setFirmenName(String firmenName) throws UngueltigeEingabeException {
-        if (firmenName == null) {
-            throw new NullPointerException("Kein Firmenname vorhanden!");
-        } else if (firmenName.length() < 2) {
-            throw new UngueltigeEingabeException("Bitte geben Sie mindestens 2 Zeichen als Firmenname ein!");
-        } else {
-            this.firmenName = firmenName;
-        }
-    }
-    
-    /**
-     * Liefert den Mitarbeiter
-     * @return den Mitarbeiter
-     * @since 1.00
-     */
-    public Mitarbeiter getMitarbeiter() {
-        return mitarbeiter;
-    }
-    
-    /**
-     * Setzt den Mitarbeiter.
-     * @param mitarbeiter Der übergebene Mitarbeiter.
-     * @since 1.00
-     */
-    private void setMitarbeiter(Mitarbeiter mitarbeiter) {
-        if (mitarbeiter == null) {
-            throw new NullPointerException("Kein Mitarbeiter vorhanden!");
-        } else {
-            this.mitarbeiter = mitarbeiter;
-        }
-    }
-    
+                    
     /**
      * Gibt die Personendaten in die Datenbank ein.
      * @param vorname Der übergebene Vorname.
@@ -219,23 +166,7 @@ public class Name {
             System.err.println(fehler.getMessage());
         } 
     }
-    
-    /**
-     * Gibt die Daten der Firma in die Datenbank ein.
-     * @param firmenName Der übergebene Firmenname.
-     * @since 1.00
-     */
-    private void eingabeInDatenbankFirmenName(String firmenName) {
-        try {
-            Connection conn = dbv.verbindungAufbauen();
-            Statement stmt = conn.createStatement();
-            stmt.executeUpdate("insert into firmenname(idfirmenname, firmenname, idmitarbeiter) values (" + getNameNummer() + ",\"" + firmenName + "\"," + getMitarbeiter().getMitarbeiterNummer() + ");");
-            dbv.verbindungTrennen();
-        } catch(SQLException fehler) {
-            System.err.println(fehler.getMessage());
-        } 
-    }
-    
+            
     /**
      * Aktiviert die Datenbankverbindung.
      * @since 1.00
@@ -280,8 +211,11 @@ public class Name {
      */
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + this.nameNummer;
+        int hash = 7;
+        hash = 47 * hash + this.nameNummer;
+        hash = 47 * hash + Objects.hashCode(this.vorName);
+        hash = 47 * hash + Objects.hashCode(this.zweitName);
+        hash = 47 * hash + Objects.hashCode(this.nachName);
         return hash;
-    }        
+    }              
 }
