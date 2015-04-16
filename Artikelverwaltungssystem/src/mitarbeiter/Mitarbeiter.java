@@ -34,10 +34,12 @@ import passwort.Passwort;
  */
 public class Mitarbeiter {
     private static int mitarbeiterAnzahl;
+    private final String NAME_DER_FIRMA = "MOUNTEK GmbH";
     private int mitarbeiterNummer;
     private DatenbankVerbindung dbv = null;
     private Name personenName;
     private Adresse adresse;
+    private Name firmenName;
     private Passwort passwort;
     
     /**
@@ -59,6 +61,7 @@ public class Mitarbeiter {
         setPersonenName(new Name(vorName, zweitName, nachName));
         setAdresse(new Adresse(strasse, hausNummer, ort, plz));
         setPaswort(new Passwort(passwort));
+        setFirmenName(new Name(NAME_DER_FIRMA,this));
         eintragInDatenbank();
     }
 
@@ -67,7 +70,7 @@ public class Mitarbeiter {
      * @return die Mitarbeiternummer
      * @since 1.00
      */
-    private int getMitarbeiterNummer() {
+    public int getMitarbeiterNummer() {
         return mitarbeiterNummer;
     }
 
@@ -120,7 +123,7 @@ public class Mitarbeiter {
     }
 
     /**
-     * Setzt das Adressenen - Objekt.
+     * Setzt das Adressen - Objekt.
      * @param adresse Das übergebene Adressen - Objekt.
      * @since 1.00
      */
@@ -166,6 +169,28 @@ public class Mitarbeiter {
             throw new NullPointerException("Kein Passwort vorhanden!");
         } else {
             this.passwort = passwort;
+        }
+    }
+    
+    /**
+     * Liefert den Firmennamen.
+     * @return den Firmennamen
+     * @since 1.00
+     */
+    public Name getFirmenName() {
+        return firmenName;
+    }
+    
+    /**
+     * Setzt den Firmennamen.
+     * @param firmenName Der übergebene Firmenname.
+     * @since 1.00s
+     */
+    private void setFirmenName(Name firmenName) {
+        if (firmenName == null) {
+            throw new NullPointerException("Kein Firmenname vorhanden!");
+        } else {
+            this.firmenName = firmenName;
         }
     }
     
