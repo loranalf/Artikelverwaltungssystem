@@ -140,7 +140,7 @@ public class Mitarbeiter {
         try {
             Connection conn = dbv.verbindungAufbauen();
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate("insert into mitarbeiter(idmitarbeiter,idname,idadresse,idpasswort) values (" + getMitarbeiterNummer() + "," + getPersonenName().getNameNummer() + "," + getAdresse().getAdressenNummer() + "," + getPasswort().getPasswortNummer() + ");");
+            stmt.executeUpdate("insert into mitarbeiter(idmitarbeiter,idname,idadresse,idpasswort) values(" + getMitarbeiterNummer() + "," + getPersonenName().getNameNummer() +"," + getAdresse().getAdressenNummer() + "," + getPasswort().getPasswortNummer() + ");");
             dbv.verbindungTrennen();
         } catch(SQLException fehler) {
             System.err.println(fehler.getMessage());

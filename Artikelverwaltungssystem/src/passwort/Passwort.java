@@ -107,7 +107,7 @@ public class Passwort {
         try {
             Connection conn = dbv.verbindungAufbauen();
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate("insert into passwort(idpasswort,passwort) values (" + getPasswortNummer() + "," + passwort + ");");
+            stmt.executeUpdate("insert into passwort(idpasswort,pwd) values(" + getPasswortNummer() + ",\"" + passwort + "\");");
             dbv.verbindungTrennen();
         } catch(SQLException fehler) {
             System.err.println(fehler.getMessage());
