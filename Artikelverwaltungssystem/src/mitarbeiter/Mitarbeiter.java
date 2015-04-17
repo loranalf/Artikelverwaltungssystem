@@ -23,6 +23,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Objects;
+import name.Firmenname;
 import name.Name;
 import passwort.Passwort;
 
@@ -34,16 +35,16 @@ import passwort.Passwort;
  */
 public class Mitarbeiter {
     private static int mitarbeiterAnzahl;
-    private final String NAME_DER_FIRMA = "MOUNTEK GmbH";
     private int mitarbeiterNummer;
     private DatenbankVerbindung dbv = null;
     private Name personenName;
     private Adresse adresse;
-    private Name firmenName;
     private Passwort passwort;
+    private Firmenname firmenName;
     
     /**
      * Erzeugt ein Mitarbeiter - Objekt.
+     * @param firmenName Der übergebene Firmenname.
      * @param vorName Der übergebene Vorname.
      * @param zweitName Der übergebene Zweitname.
      * @param nachName Der übergebene Nachname.
@@ -55,13 +56,13 @@ public class Mitarbeiter {
      * @throws UngueltigeEingabeException  Wird geworfen, wenn die Eingaben des Benutzers fehlerhaft sind.
      * @since 1.00
      */
-    public Mitarbeiter(String vorName, String zweitName, String nachName, String strasse, int hausNummer, String ort, String plz, String passwort) throws UngueltigeEingabeException {
+    public Mitarbeiter(Firmenname firmenName, String vorName, String zweitName, String nachName, String strasse, int hausNummer, String ort, String plz, String passwort) throws UngueltigeEingabeException {
         setDatenbankverbindung();
         setMitarbeiterNummer(++mitarbeiterAnzahl);
+        setFirmenName(firmenName);
         setPersonenName(new Name(vorName, zweitName, nachName));
         setAdresse(new Adresse(strasse, hausNummer, ort, plz));
-        setPaswort(new Passwort(passwort));
-        setFirmenName(new Name(NAME_DER_FIRMA,this));
+        setPaswort(new Passwort(passwort));        
         eintragInDatenbank();
     }
 
@@ -83,6 +84,29 @@ public class Mitarbeiter {
         this.mitarbeiterNummer = mitarbeiterNummer;
     }
 
+    /**
+     * Liefert den Firmenname.
+     * @return den Firmenname
+     * @since 1.00
+     */
+    public Firmenname getFirmenName() {
+        return firmenName;
+    }
+    
+    /**
+     * Setzt den Firmennamen.
+     * @param firmenName Der übergebene Firmenname
+     * @since 1.00
+     */
+    private void setFirmenName(Firmenname firmenName) {
+        if (firmenName == null) {
+            throw new NullPointerException("Kein Firmenname vorhanden!");
+        } else {
+            this.firmenName= firmenName;
+        }
+    }
+    
+    
     /**
      * Liefert das Personennamen - Objekt.
      * @return das Personennamen - Objekt
@@ -136,14 +160,14 @@ public class Mitarbeiter {
     }
     
     /**
-     * Diese Methode dient dem Eintrag der Daten in die DAtenbank.
+     * Diese Methode dient dem Eintrag der Daten in die Datenbank.
      * @since 1.00
      */
     private void eintragInDatenbank() {
         try {
             Connection conn = dbv.verbindungAufbauen();
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate("insert into mitarbeiter(idmitarbeiter,idname,idadresse,idpasswort) values(" + getMitarbeiterNummer() + "," + getPersonenName().getNameNummer() +"," + getAdresse().getAdressenNummer() + "," + getPasswort().getPasswortNummer() + ");");
+            stmt.executeUpdate("insert into mitarbeiter(idmitarbeiter,idname,idadresse,idpasswort,idfirmenname) values(" + getMitarbeiterNummer() + "," + getPersonenName().getNameNummer() +"," + getAdresse().getAdressenNummer() + "," + getPasswort().getPasswortNummer() + "," + getFirmenName().getFirmenNameNummer() + ");");
             dbv.verbindungTrennen();
         } catch(SQLException fehler) {
             System.err.println(fehler.getMessage());
@@ -170,29 +194,7 @@ public class Mitarbeiter {
         } else {
             this.passwort = passwort;
         }
-    }
-    
-    /**
-     * Liefert den Firmennamen.
-     * @return den Firmennamen
-     * @since 1.00
-     */
-    public Name getFirmenName() {
-        return firmenName;
-    }
-    
-    /**
-     * Setzt den Firmennamen.
-     * @param firmenName Der übergebene Firmenname.
-     * @since 1.00s
-     */
-    private void setFirmenName(Name firmenName) {
-        if (firmenName == null) {
-            throw new NullPointerException("Kein Firmenname vorhanden!");
-        } else {
-            this.firmenName = firmenName;
-        }
-    }
+    }        
     
     /**
      * Liefert die Daten des Objektes.
