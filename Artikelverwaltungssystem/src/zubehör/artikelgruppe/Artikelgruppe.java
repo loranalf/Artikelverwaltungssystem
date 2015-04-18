@@ -80,7 +80,7 @@ public class Artikelgruppe {
     
     /**
      * Liefert die Daten des Objektes.
-     * @return die DAten des Objektes
+     * @return die Daten des Objektes
      * @since 1.00
      */
     @Override
