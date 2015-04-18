@@ -111,7 +111,7 @@ public class Firmenname {
         try {
             Connection conn = dbv.verbindungAufbauen();
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate("insert into firmenname(idfirmenname,firmenname) values (" + getFirmenNameNummer() + "\"" + firmenName + "\"");
+            stmt.executeUpdate("insert into firmenname(idfirmenname,firmenname) values(" + getFirmenNameNummer() + ",\"" + firmenName + "\");");
             dbv.verbindungTrennen();
         } catch(SQLException fehler) {
             System.err.println(fehler.getMessage());
