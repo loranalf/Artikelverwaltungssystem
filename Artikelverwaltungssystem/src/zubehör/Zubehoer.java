@@ -31,19 +31,22 @@ abstract class Zubehoer {
     private int zubehoerNummer;
     private String artikelName;
     private String artikelNummer;
+    private String beschreibung;
     private Artikelgruppe artikelGruppe;
     
     /**
      * Erzeugt ein Zubehoer - Objekt mit den übergebenen Parametern.
      * @param artikelGruppe Die übergebne Artikelgruppe.
      * @param artikelName Der übergebene Artikelname.
+     * @param  beschreibung Die übergebene Beschreibung.
      * @throws UngueltigeEingabeException Wird geworfen, wenn die Eingabe des Benutzers ungültig ist.
      * @since 1.00
      */
-    protected Zubehoer(Artikelgruppe artikelGruppe, String artikelName) throws UngueltigeEingabeException {
+    protected Zubehoer(Artikelgruppe artikelGruppe, String artikelName, String beschreibung) throws UngueltigeEingabeException {
         setZubehoerNummer(++anzahlZubehoer);
         setArtikelGruppe(artikelGruppe);
         setArtikelName(artikelName);
+        setBeschreibung(beschreibung);
         setArtikelNummer();
     }
 
@@ -131,6 +134,28 @@ abstract class Zubehoer {
     }
     
     /**
+     * Liefert die Beschreibung des Objektes.
+     * @return die Beschreibung
+     * @since 1.00
+     */
+    protected String getBeschreibung() {
+        return beschreibung;
+    }
+    
+    /**
+     * Setzt die Beschreibung.
+     * @param beschreibung Die übergebene Beschreibung
+     * @since 1.00
+     */
+    private void setBeschreibung(String beschreibung) {
+        if (beschreibung == null) {
+            throw new NullPointerException("Keine Beschreibung vorhanden!");
+        } else {
+            this.beschreibung = beschreibung;
+        }
+    }
+    
+    /**
      * Liefer die Daten des Artikels.
      * @return die Daten des Artikels.
      * @since 1.00
@@ -173,6 +198,7 @@ abstract class Zubehoer {
         hash = 97 * hash + Objects.hashCode(this.artikelName);
         hash = 97 * hash + Objects.hashCode(this.artikelNummer);
         hash = 97 * hash + Objects.hashCode(this.artikelGruppe);
+        hash = 97 * hash + Objects.hashCode(this.beschreibung);
         return hash;
     }            
 }

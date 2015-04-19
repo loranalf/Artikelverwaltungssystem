@@ -28,7 +28,6 @@ import zubehör.artikelgruppe.Artikelgruppe;
  */
 class Vlies extends Zubehoer {
     private double gramm;
-    private String beschreibung;
     
     /**
      * Erzeugt ein Vlies - Objekt mit den übergebenen Parametern.
@@ -40,9 +39,8 @@ class Vlies extends Zubehoer {
      * @since 1.00
      */
     protected Vlies(Artikelgruppe artikelGruppe, String artikelName, double gramm, String beschreibung) throws UngueltigeEingabeException {
-        super(artikelGruppe, artikelName);
+        super(artikelGruppe, artikelName, beschreibung);
         setGramm(gramm);
-        setBeschreibung(beschreibung);
     }
         
     /**
@@ -69,28 +67,6 @@ class Vlies extends Zubehoer {
     }
     
     /**
-     * Liefert die Beschreibung.
-     * @return die Beschreibung
-     * @since 1.00
-     */
-    protected String getBeschreibung() {
-        return beschreibung;
-    }
-    
-    /**
-     * Setzt die Beschreibung.
-     * @param beschreibung Die übergebene Beschreibung
-     * @since 1.00
-     */
-    private void setBeschreibung(String beschreibung) {
-        if (beschreibung == null) {
-            throw new NullPointerException("Keine Beschreibung vorhanden!");
-        } else {
-            this.beschreibung = beschreibung;
-        }
-    }
-    
-    /**
      * Liefert die Daten des Objektes.
      * @return die Daten des Objektes
      * @since 1.00
@@ -99,7 +75,7 @@ class Vlies extends Zubehoer {
     public String toString() {
         return  super.toString() + "\n" +
                 "Gramm: " + getGramm() + "\n" +
-                "Beschreibung: " + getBeschreibung();
+                "Beschreibung: " + super.getBeschreibung();
     }
     
     /**
@@ -130,7 +106,6 @@ class Vlies extends Zubehoer {
     public int hashCode() {
         int hash = super.hashCode();
         hash = 59 * hash + (int) (Double.doubleToLongBits(this.gramm) ^ (Double.doubleToLongBits(this.gramm) >>> 32));
-        hash = 59 * hash + Objects.hashCode(this.beschreibung);
         return hash;
     }        
 }

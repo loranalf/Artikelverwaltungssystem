@@ -28,7 +28,6 @@ import zubehör.artikelgruppe.Artikelgruppe;
  */
 class Klebespray extends Zubehoer {
     private double inhalt;
-    private String beschreibung;
     
     /**
      * Erzeugt ein Klebespray - Objekt.
@@ -40,9 +39,8 @@ class Klebespray extends Zubehoer {
      * @since 1.00
      */
     protected Klebespray(Artikelgruppe artikelGruppe, String artikelName, double inhalt, String beschreibung) throws UngueltigeEingabeException {
-        super(artikelGruppe, artikelName);
+        super(artikelGruppe, artikelName, beschreibung);
         setInhalt(inhalt);
-        setBeschreibung(beschreibung);
     }
     
     /**
@@ -66,29 +64,7 @@ class Klebespray extends Zubehoer {
         } else {
             this.inhalt = inhalt;
         }
-    }
-    
-    /**
-     * Liefert die Beschreibung.
-     * @return die Beschreibung
-     * @since 1.00
-     */
-    protected String getBeschreibung() {
-        return beschreibung;
-    }
-    
-    /**
-     * Setzt die Beschreibung.
-     * @param beschreibung Die übergeben Beschreibung
-     * @since 1.00
-     */
-    private void setBeschreibung(String beschreibung) {
-        if (beschreibung == null) {
-            throw new NullPointerException("Keine Beschreibung vorhanden!");
-        } else {
-            this.beschreibung = beschreibung;
-        }
-    }
+    }        
     
     /**
      * Liefert die Daten des Objektes.
@@ -99,7 +75,7 @@ class Klebespray extends Zubehoer {
     public String toString() {
         return  super.toString() + "\n" + 
                 "Inhalt: " + getInhalt() + " ml" + "\n" +
-                "Beschreibung: " + getBeschreibung();
+                "Beschreibung: " + super.getBeschreibung();
     }
     
     /**
@@ -130,7 +106,6 @@ class Klebespray extends Zubehoer {
     public int hashCode() {
         int hash = super.hashCode();
         hash = 97 * hash + (int) (Double.doubleToLongBits(this.inhalt) ^ (Double.doubleToLongBits(this.inhalt) >>> 32));
-        hash = 97 * hash + Objects.hashCode(this.beschreibung);
         return hash;
     }        
 }
