@@ -49,7 +49,7 @@ abstract class Zubehoer {
         setBeschreibung(beschreibung);
         setArtikelNummer();
     }
-
+    
     /**
      * Liefert die Zubehörnummer.
      * @return die Zubehörnummer
