@@ -16,6 +16,7 @@
  */
 package zubehör;
 
+import exceptions.UngueltigeEingabeException;
 import java.util.ArrayList;
 import zubehör.artikelgruppe.Artikelgruppe;
 
@@ -27,6 +28,7 @@ import zubehör.artikelgruppe.Artikelgruppe;
 public class ZubehoerVerwaltung {    
     private ArrayList<Klebespray> klebeSprayListe;
     private ArrayList<Lagerfett> lagerFettListe;
+    private ArrayList<Nadeln> nadelListe;
     private ArrayList<Nadeloel> nadelOelListe;
     private ArrayList<Spruehoel> spruehOelListe;
     private ArrayList<Vlies> vliesListe;
@@ -39,6 +41,7 @@ public class ZubehoerVerwaltung {
     public ZubehoerVerwaltung() {
         setKlebeSprayListe();
         setLagerFettListe();
+        setNadelListe();
         setNadelOelListe();
         setSpruehOelListe();
         setVliesListe();
@@ -129,9 +132,114 @@ public class ZubehoerVerwaltung {
         this.vliesListe = new ArrayList<>();
     }
     
-    public void fuegeKlebeSprayHinzu(Artikelgruppe artikelGruppe, String artikelName, double inhalt, String beschreibung) {
+    /**
+     * Liefert die NadelListe.
+     * @return die NadelListe
+     * @since 1.00
+     */
+    public ArrayList getNadelListe() {
+        return nadelListe;
+    }
+    
+    /**
+     * Initialisiert die NadelListe.
+     * @since 1.00
+     */
+    private void setNadelListe() {
+        this.nadelListe = new ArrayList<>();
+    }
+    
+    /**
+     * Fügt das KlebeSpray der Liste hinzu.
+     * @param artikelGruppe Die übergebene Artikelgruppe.
+     * @param artikelName Der Übergebene Artikelname.
+     * @param inhalt Der übergebene Inhalt.
+     * @throws UngueltigeEingabeException Wird geworfen, wenn eine der Eingaben des Benutzers ungültig ist.
+     * @since 1.00
+     */
+    public void fuegeKlebeSprayHinzu(Artikelgruppe artikelGruppe, String artikelName, double inhalt) throws UngueltigeEingabeException {
         if (artikelGruppe == null) {
             throw new NullPointerException("Keine Artikelgruppe vorhanden!");
+        } else {
+            Klebespray klebeSpray = new Klebespray(artikelGruppe, artikelName, inhalt);
+            klebeSprayListe.add(klebeSpray);
+        }
+    }
+    
+    /**
+     * Fügt das Lagerfett der Lagerfettliste hinzu.
+     * @param artikelGruppe Die übergebene Artikelgruppe.
+     * @param artikelName Der übergebene Artikelname.
+     * @param inhalt Der übergebene Inhalt.
+     * @throws UngueltigeEingabeException Wird geworfen, wenn die Eingabe des Benutzers ungültig ist.
+     * @since 1.00
+     */
+    public void fuegeLagerfettHinzu(Artikelgruppe artikelGruppe, String artikelName, double inhalt) throws UngueltigeEingabeException {
+        if (artikelGruppe == null) {
+            throw new NullPointerException("Keine Artikelgruppe vorhanden!");
+        } else {
+            Lagerfett lagerFett = new Lagerfett(artikelGruppe, artikelName, inhalt);
+            lagerFettListe.add(lagerFett);
+        }
+    }
+    
+    /**
+     * Diese Methode fügt der Nadelliste eine Nadel hinzu.
+     * @param artikelgruppe Die übergebene Artikelgruppe
+     * @param artikelName Der übergebene Artikelname.
+     * @throws UngueltigeEingabeException Wird geworfen, wenn die Eingabe des Benutzers ungültig ist.
+     * @since 1.00
+     */
+    public void fuegeNadelnHinzu(Artikelgruppe artikelgruppe, String artikelName) throws UngueltigeEingabeException {
+        if (artikelgruppe == null) {
+            throw new NullPointerException("Keine Artikelgruppe vorhanden!");
+        } else {
+            Nadeln nadel = new Nadeln(artikelgruppe, artikelName);
+            nadelListe.add(nadel);
+        }
+    }
+    
+    /**
+     * Diese Methode fügt der Naelölliste ein Nadelöl hinzu.
+     * @param artikelGruppe Die übergebene Artikelgruppe.
+     * @param artikelName Der übergebene Artikelname
+     * @param inhalt Der übergebene Inhalt.
+     * @throws UngueltigeEingabeException Wird geworfen, wenn die Einagbe des Benutzers ungültig ist.
+     * @since 1.00
+     */
+    public void fuegeNadelOelHinzu(Artikelgruppe artikelGruppe, String artikelName, double inhalt) throws UngueltigeEingabeException {
+        if (artikelGruppe == null) {
+            throw new NullPointerException("Keine Artikelgruppe vorhanden!");
+        } else {
+            Nadeloel nadelOel = new Nadeloel(artikelGruppe, artikelName, inhalt);
+            nadelOelListe.add(nadelOel);
+        }
+    }
+    
+    
+    public void fuegeSpruehOelHinzu(Artikelgruppe artikelGruppe, String artikelName, double inhalt) throws UngueltigeEingabeException {
+        if (artikelGruppe == null) {
+            throw new NullPointerException("Keine Artikelgruppe vorhanden!");
+        } else {
+            Spruehoel spruehOel = new Spruehoel(artikelGruppe, artikelName, inhalt);
+            spruehOelListe.add(spruehOel);
+        }
+    }
+    
+    /**
+     * Fügt Vlies der Vliesliste hinzu.
+     * @param artikelGruppe Die übergebene Artikelgruppe.
+     * @param artikelName Der übergebene Artikelname.
+     * @param gramm Die übergebene Grammzahl.
+     * @throws UngueltigeEingabeException Wird geworfen, wenn die Eingaben des Benutzer ungültig sind.
+     * @since 1.00
+     */
+    public void fuegeVliesHinzu(Artikelgruppe artikelGruppe, String artikelName, double gramm) throws UngueltigeEingabeException {
+        if (artikelGruppe == null) {
+            throw new NullPointerException("Keine Artikelgruppe vorhanden!");
+        } else {
+            Vlies vlies = new Vlies(artikelGruppe, artikelName, gramm);
+            vliesListe.add(vlies);
         }
     }
 }
