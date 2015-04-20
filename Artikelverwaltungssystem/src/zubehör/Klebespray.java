@@ -17,7 +17,6 @@
 package zubehör;
 
 import exceptions.UngueltigeEingabeException;
-import java.util.Objects;
 import zubehör.artikelgruppe.Artikelgruppe;
 
 /**
