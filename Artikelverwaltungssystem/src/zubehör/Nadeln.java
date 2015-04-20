@@ -30,12 +30,11 @@ class Nadeln extends Zubehoer {
      * Erzeugt ein Nadel - Objekt.
      * @param artikelGruppe Die übergebene Artikelgruppe.
      * @param artikelName Der übergebene Artikelname
-     * @param beschreibung Die übergebene Beschreibung
      * @throws UngueltigeEingabeException Wird geworfen, wenn die die Eingabe des Benutzers ungültig ist.
      * @since 1.00
      */
-    protected Nadeln(Artikelgruppe artikelGruppe, String artikelName, String beschreibung) throws UngueltigeEingabeException {
-        super(artikelGruppe, artikelName, beschreibung);
+    protected Nadeln(Artikelgruppe artikelGruppe, String artikelName) throws UngueltigeEingabeException {
+        super(artikelGruppe, artikelName);
     }
     
     /**

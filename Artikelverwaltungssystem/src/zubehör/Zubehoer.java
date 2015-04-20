@@ -38,15 +38,13 @@ abstract class Zubehoer {
      * Erzeugt ein Zubehoer - Objekt mit den übergebenen Parametern.
      * @param artikelGruppe Die übergebne Artikelgruppe.
      * @param artikelName Der übergebene Artikelname.
-     * @param  beschreibung Die übergebene Beschreibung.
      * @throws UngueltigeEingabeException Wird geworfen, wenn die Eingabe des Benutzers ungültig ist.
      * @since 1.00
      */
-    protected Zubehoer(Artikelgruppe artikelGruppe, String artikelName, String beschreibung) throws UngueltigeEingabeException {
+    protected Zubehoer(Artikelgruppe artikelGruppe, String artikelName) throws UngueltigeEingabeException {
         setZubehoerNummer(++anzahlZubehoer);
         setArtikelGruppe(artikelGruppe);
-        setArtikelName(artikelName);
-        setBeschreibung(beschreibung);
+        setArtikelName(artikelName);        
         setArtikelNummer();
     }
     
@@ -147,7 +145,7 @@ abstract class Zubehoer {
      * @param beschreibung Die übergebene Beschreibung
      * @since 1.00
      */
-    private void setBeschreibung(String beschreibung) {
+    protected void setBeschreibung(String beschreibung) {
         if (beschreibung == null) {
             throw new NullPointerException("Keine Beschreibung vorhanden!");
         } else {

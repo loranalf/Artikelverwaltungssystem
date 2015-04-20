@@ -33,12 +33,11 @@ class Klebespray extends Zubehoer {
      * @param artikelGruppe Die übergebene Artikelgruppe.
      * @param artikelName Der übergebene Artikelname.
      * @param inhalt Der übergebene Inhalt.
-     * @param beschreibung Die übergebene Beschreibung.
      * @throws UngueltigeEingabeException Wird geworfen, wenn die Eingabe des Benutezrs ungültig ist.
      * @since 1.00
      */
-    protected Klebespray(Artikelgruppe artikelGruppe, String artikelName, double inhalt, String beschreibung) throws UngueltigeEingabeException {
-        super(artikelGruppe, artikelName, beschreibung);
+    protected Klebespray(Artikelgruppe artikelGruppe, String artikelName, double inhalt) throws UngueltigeEingabeException {
+        super(artikelGruppe, artikelName);
         setInhalt(inhalt);
     }
     

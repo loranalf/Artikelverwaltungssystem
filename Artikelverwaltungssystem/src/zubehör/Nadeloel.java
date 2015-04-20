@@ -33,12 +33,11 @@ class Nadeloel extends Zubehoer {
      * @param artikelGruppe Die übergebne Artikelgruppe.
      * @param artikelName Der übergebne Artikelname.
      * @param inhalt Der übergebene Inhalt.
-     * @param beschreibung Die übergebene Beschreibung.
      * @throws UngueltigeEingabeException Wird geworfen, wenn die Eingabe des Benutzers fehlerhaft ist.
      * @since 1.00
      */
-    protected Nadeloel(Artikelgruppe artikelGruppe, String artikelName, double inhalt, String beschreibung) throws UngueltigeEingabeException {
-        super(artikelGruppe, artikelName, beschreibung);
+    protected Nadeloel(Artikelgruppe artikelGruppe, String artikelName, double inhalt) throws UngueltigeEingabeException {
+        super(artikelGruppe, artikelName);
         setInhalt(inhalt);
     }
     

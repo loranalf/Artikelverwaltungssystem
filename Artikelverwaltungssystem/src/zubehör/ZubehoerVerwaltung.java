@@ -17,6 +17,7 @@
 package zubehör;
 
 import java.util.ArrayList;
+import zubehör.artikelgruppe.Artikelgruppe;
 
 /**
  * Diese Klasse bildet die Zubehörverwaltung ab.
@@ -128,5 +129,9 @@ public class ZubehoerVerwaltung {
         this.vliesListe = new ArrayList<>();
     }
     
-    
+    public void fuegeKlebeSprayHinzu(Artikelgruppe artikelGruppe, String artikelName, double inhalt, String beschreibung) {
+        if (artikelGruppe == null) {
+            throw new NullPointerException("Keine Artikelgruppe vorhanden!");
+        }
+    }
 }

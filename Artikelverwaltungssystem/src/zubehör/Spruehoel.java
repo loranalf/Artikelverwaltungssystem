@@ -31,12 +31,11 @@ class Spruehoel extends Nadeloel {
      * @param artikelGruppe Deie übergebene Artikelgruppe.
      * @param artikelName Der übergebene Artikelname.
      * @param inhalt Der übergebene Inhalt.
-     * @param beschreibung Die übergebene Beschreibung.
      * @throws UngueltigeEingabeException  Wird geworfen, wenn die Eingabe des Benutzers ungültig ist.
      * @since 1.00
      */
-    protected Spruehoel(Artikelgruppe artikelGruppe, String artikelName, double inhalt, String beschreibung) throws UngueltigeEingabeException {
-        super(artikelGruppe, artikelName, inhalt, beschreibung);
+    protected Spruehoel(Artikelgruppe artikelGruppe, String artikelName, double inhalt) throws UngueltigeEingabeException {
+        super(artikelGruppe, artikelName, inhalt);
     }
     
     /**

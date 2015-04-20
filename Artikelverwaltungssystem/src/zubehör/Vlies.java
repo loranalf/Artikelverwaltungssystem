@@ -33,12 +33,11 @@ class Vlies extends Zubehoer {
      * @param artikelGruppe Die übergebene Artikelgruppe.
      * @param artikelName Der übergebene Artikelname.
      * @param gramm Die übergebene Grammmenge.
-     * @param beschreibung Die übergebene Beschreibung.
      * @throws UngueltigeEingabeException Wird geworfen, wenn die Eingabe des Benutzers fehlerhaft ist.
      * @since 1.00
      */
-    protected Vlies(Artikelgruppe artikelGruppe, String artikelName, double gramm, String beschreibung) throws UngueltigeEingabeException {
-        super(artikelGruppe, artikelName, beschreibung);
+    protected Vlies(Artikelgruppe artikelGruppe, String artikelName, double gramm) throws UngueltigeEingabeException {
+        super(artikelGruppe, artikelName);
         setGramm(gramm);
     }
         
