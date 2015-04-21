@@ -20,7 +20,7 @@ import exceptions.UngueltigeEingabeException;
 import java.util.Objects;
 
 /**
- * Diese Klassebildet eine Einkopfmaschine ab.
+ * Diese Klasse bildet eine Einkopfmaschine ab.
  * @author Alfred Loran
  * @version 1.00
  */
