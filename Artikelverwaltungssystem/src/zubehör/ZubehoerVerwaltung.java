@@ -18,6 +18,7 @@ package zubehör;
 
 import exceptions.UngueltigeEingabeException;
 import java.util.ArrayList;
+import java.util.Objects;
 import zubehör.artikelgruppe.Artikelgruppe;
 
 /**
@@ -242,4 +243,82 @@ public class ZubehoerVerwaltung {
             vliesListe.add(vlies);
         }
     }
+    
+    /**
+     * Liefert die Daten des Objektes.
+     * @return die Daten des Objektes
+     * @since 1.00
+     */
+    @Override
+    public String toString() {
+        String ausgabe = "***********************************************\nKlebesprayliste: \n";
+        
+        for (Klebespray k: klebeSprayListe) {
+            ausgabe += k.toString() + "\n";
+        }
+        
+        ausgabe+= "Vliesliste: \n";
+        for (Vlies v : vliesListe) {
+            ausgabe += v.toString() + "\n";
+        }
+        
+        ausgabe +="Nadelliste: \n";
+        for (Nadeln n : nadelListe) {
+            ausgabe += n.toString() + "\n";
+        }
+                
+        ausgabe += "Nadelölliste: \n";
+        for (Nadeloel no: nadelOelListe) {
+            ausgabe += no.toString() + "\n";
+        }
+        
+        ausgabe += "Sprühölliste: \n";
+        for (Spruehoel sp : spruehOelListe) {
+            ausgabe += sp.toString() + "\n";
+        }
+        
+        ausgabe += "Lagerfettliste: \n";
+        for (Lagerfett l : lagerFettListe) {
+            ausgabe += l.toString() + "\n";
+        }
+        ausgabe += "***********************************************";
+        
+        return ausgabe;
+    }
+    
+    /**
+     * Vergleicht zwei Objekte.
+     * @param object das zu vergleichende Objekt.
+     * @return true, Objekte sind gleich.
+     *         false, Objekte sind ungleich.
+     * @since 1.00
+     */
+    @Override
+    public boolean equals(Object object) {
+        if ( object == null) {
+            throw new NullPointerException("Kein Objekt zum Vergleichen vorhanden!");
+        } else if (!(object instanceof ZubehoerVerwaltung)) {
+            return false;
+        } else {
+            ZubehoerVerwaltung zbv = (ZubehoerVerwaltung)object;
+            return this.hashCode() == zbv.hashCode();
+        }
+    }
+
+    /**
+     * Generiert und liefert den hashCode des Objektes.
+     * @return den hashCode
+     * @since 1.00
+     */
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.klebeSprayListe);
+        hash = 41 * hash + Objects.hashCode(this.lagerFettListe);
+        hash = 41 * hash + Objects.hashCode(this.nadelListe);
+        hash = 41 * hash + Objects.hashCode(this.nadelOelListe);
+        hash = 41 * hash + Objects.hashCode(this.spruehOelListe);
+        hash = 41 * hash + Objects.hashCode(this.vliesListe);
+        return hash;
+    }        
 }
