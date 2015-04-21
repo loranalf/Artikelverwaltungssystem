@@ -24,7 +24,7 @@ import java.util.Objects;
  * @author Alfred Loran
  * @version 1.00
  */
-class EinKopf {
+class Maschine {
     private static int anzahlEinkofMaschine;
     private int einkopfMaschinenNummer;
     private String maschinenNummer;
@@ -46,7 +46,7 @@ class EinKopf {
      * @throws UngueltigeEingabeException Wird geworfen, wenn die Eingaben des Benutzr ungültig sind.
      * @since 1.00
      */
-    protected EinKopf(String maschinenName, Kopf kopf, Motor motor, Daten daten, Stickfeldgroesse stickFeldgroesse, String elektro) throws UngueltigeEingabeException {
+    protected Maschine(String maschinenName, Kopf kopf, Motor motor, Daten daten, Stickfeldgroesse stickFeldgroesse, String elektro) throws UngueltigeEingabeException {
         setEinkopfMaschinenNummer(++anzahlEinkofMaschine);
         setMaschinenName(maschinenName);
         setKopf(kopf);
@@ -257,10 +257,10 @@ class EinKopf {
     public boolean equals(Object object) {
         if (object == null) {
             throw new NullPointerException("Kein Objekt zum Vergleichen vorhanden!");
-        } else if (!(object instanceof EinKopf)) {
+        } else if (!(object instanceof Maschine)) {
             return false;
         } else {
-            EinKopf einKopf = (EinKopf)object;
+            Maschine einKopf = (Maschine)object;
             return einKopf.hashCode() == this.hashCode();
         }
     }
