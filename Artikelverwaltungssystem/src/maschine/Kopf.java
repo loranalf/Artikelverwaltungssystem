@@ -30,6 +30,7 @@ class Kopf {
     
     protected Kopf(int anzahlKoepfe, NadelAnzahlEnum anzahlNadeln) throws UngueltigeEingabeException {
         setAnzahlKoepfe(anzahlKoepfe);
+        setAnzahlNadelnUndFarben(anzahlNadeln);
     }
 
     /**
@@ -69,7 +70,7 @@ class Kopf {
      * @param anzahlNadeln Die übergebene Anzahl der Nadeln.                       
      * @since 1.00
      */
-    public void setAnzahlNadelnUndFarben(NadelAnzahlEnum anzahlNadeln) {
+    private void setAnzahlNadelnUndFarben(NadelAnzahlEnum anzahlNadeln) {
         if (anzahlNadeln == null) {
             throw new NullPointerException("Keine Anzahl der Nadeln vorhanden!");
         } else {

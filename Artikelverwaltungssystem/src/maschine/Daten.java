@@ -30,7 +30,7 @@ class Daten {
     private String stichlaenge;
     private int drehzahl;
     private int anzahlUSBStecker;
-    private String monitorgroese;
+    private int monitorgroese;
     
     /**
      * Erzuegt ein Daten - Objekt.
@@ -43,7 +43,7 @@ class Daten {
      * @throws UngueltigeEingabeException Wird geworfen, wenn die Eingaben des Benutzers ungültig ist.
      * @since 1.00
      */
-    protected Daten(float gewicht, int speicher, String stichLaenge, int drehzahl, int anzahlUSBStecker, String monitorgroesse) throws UngueltigeEingabeException {
+    protected Daten(float gewicht, int speicher, String stichLaenge, int drehzahl, int anzahlUSBStecker, int monitorgroesse) throws UngueltigeEingabeException {
         setGewicht(gewicht);       
         setSpeicher(speicher);
         setStichlaenge(stichLaenge);
@@ -171,7 +171,7 @@ class Daten {
      * @return die Monitorgroesse.
      * @since 1.00
      */
-    protected String getMonitorgroese() {
+    protected int getMonitorgroese() {
         return monitorgroese;
     }
 
@@ -181,11 +181,9 @@ class Daten {
      * @throws UngueltigeEingabeException Wird geworfen, wenn die Eingabe weniger als 4 Zeichen enthält.
      * @since 1.00
      */
-    private void setMonitorgroese(String monitorgroese) throws UngueltigeEingabeException {
-        if (monitorgroese == null) {
-            throw new NullPointerException("Keine Monitorgröße vorhanden!");
-        } else if (monitorgroese.length() < 4) {
-            throw new UngueltigeEingabeException("Bitte geben Sie mindestens 4 Zeichen ein!");
+    private void setMonitorgroese(int monitorgroese) throws UngueltigeEingabeException {
+        if (monitorgroese <= 0) {
+            throw new UngueltigeEingabeException("Bitte geben Sie eine Zahl größer 0 ein!");
         } else {
             this.monitorgroese = monitorgroese;
         }
@@ -200,10 +198,10 @@ class Daten {
     public String toString() {
         return  "Gewicht: " + getGewicht() + "kg\n" + 
                 "Speicher: " + getSpeicher() + " Stiche\n" +
-                "Stichlänge: " + getStichlaenge() + "mm\n" + 
-                "Drehzahl: " + getDrehzahl() + "Stiche/min\n" + 
+                "Stichlänge: " + getStichlaenge() + " mm\n" + 
+                "Drehzahl: " + getDrehzahl() + " Stiche/min\n" + 
                 "Anzahl USB Ports: " + getAnzahlUSBStecker() + "\n" + 
-                "Monitorgroesse: " + getMonitorgroese();
+                "Monitorgroesse: " + getMonitorgroese() + " Zoll";
                 
     }
     

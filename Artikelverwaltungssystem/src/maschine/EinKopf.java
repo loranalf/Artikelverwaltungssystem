@@ -223,8 +223,8 @@ class EinKopf {
     private void setElektro(String bezeichnung) throws UngueltigeEingabeException {
         if (bezeichnung == null) {
             throw new NullPointerException("Keine Bezeichnung vorhanden!");
-        } else if (bezeichnung.length() < 4) {
-            throw new UngueltigeEingabeException("Bitte geben Sie mindestens 4 Zeichen als Bezeichnung ein!");
+        } else if (bezeichnung.length() < 2) {
+            throw new UngueltigeEingabeException("Bitte geben Sie mindestens 2 Zeichen als Bezeichnung ein!");
         } else {
             this.elektro = bezeichnung;
         }
@@ -237,13 +237,13 @@ class EinKopf {
      */
     @Override
     public String toString() {
-        return  "*************************************\n" + getMaschineneNummer() + "\n" + 
+        return  "**********************************************\nMaschinennummer: " + getMaschineneNummer() + "\n" + 
                 "Maschinenname: " + getMaschinenName() + "\n" + 
                 getKopf().toString() + "\n" +
                 getMotor().toString() + "\n" +
                 getDaten().toString() + "\n" + 
                 getStickFeldGoesse().toString() + "\n" + 
-                "Elektro: " + getElektro() + "\n*************************************\n";
+                "Elektro: " + getElektro() + " Watt\n**********************************************\n";
     }
     
     /**
