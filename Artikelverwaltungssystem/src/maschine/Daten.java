@@ -198,7 +198,8 @@ class Daten {
                 "Speicher: " + getSpeicher() + " Stiche\n" +
                 "Stichlänge: " + getStichlaenge() + "mm\n" + 
                 "Drehzahl: " + getDrehzahl() + "Stiche/min\n" + 
-                "Anzahl USB Ports: " + getAnzahlUSBStecker();
+                "Anzahl USB Ports: " + getAnzahlUSBStecker() + "\n" + 
+                "Monitorgroesse: " + getMonitorgroese();
                 
     }
     
