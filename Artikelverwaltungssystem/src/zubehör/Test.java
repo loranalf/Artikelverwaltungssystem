@@ -36,41 +36,50 @@ public class Test {
         ZubehoerVerwaltung zbv = new ZubehoerVerwaltung();
         
         for (int i = 0; i < 10; i++) {
+            Klebespray s;
+            
+            try {
+                s = new Klebespray(ag1, "Klebespray", 1);
+                s.setBeschreibung("Tolles Klebespray");
+            } catch(UngueltigeEingabeException fehler) {
+                System.err.println(fehler.getMessage());
+            }
+            
             try {
                 zbv.fuegeKlebeSprayHinzu(ag1, "Klebespray", 1+i);
             } catch(UngueltigeEingabeException fehler) {
                 System.err.println(fehler.getMessage());
             }
-            /*
+            
             try {
-                zbv.fuegeKlebeSprayHinzu(ag2, "Lagerfett", 1+i);
+                zbv.fuegeLagerfettHinzu(ag2, "Lagerfett", 1+i);
             } catch(UngueltigeEingabeException fehler) {
                 System.err.println(fehler.getMessage());
             }
             
             try {
-                zbv.fuegeKlebeSprayHinzu(ag3, "Nadeln", 1+i);
+                zbv.fuegeNadelnHinzu(ag3, "Nadeln");
             } catch(UngueltigeEingabeException fehler) {
                 System.err.println(fehler.getMessage());
             }
             
             try {
-                zbv.fuegeKlebeSprayHinzu(ag4, "Nadelöl", 1+i);
+                zbv.fuegeNadelOelHinzu(ag4, "Nadelöl", 1+i);
             } catch(UngueltigeEingabeException fehler) {
                 System.err.println(fehler.getMessage());
             }
             
             try {
-                zbv.fuegeKlebeSprayHinzu(ag5, "Sprühöl", 1+i);
+                zbv.fuegeSpruehOelHinzu(ag5, "Sprühöl", 1+i);
             } catch(UngueltigeEingabeException fehler) {
                 System.err.println(fehler.getMessage());
             }
             
             try {
-                zbv.fuegeKlebeSprayHinzu(ag6, "Vlies", 1+i);
+                zbv.fuegeVliesHinzu(ag6, "Vlies", 1+i);
             } catch(UngueltigeEingabeException fehler) {
                 System.err.println(fehler.getMessage());
-            }*/
+            }
         }
         
         System.out.println(zbv.toString());

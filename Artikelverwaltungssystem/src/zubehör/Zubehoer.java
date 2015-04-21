@@ -28,10 +28,10 @@ import zubehör.artikelgruppe.Artikelgruppe;
  */
 abstract class Zubehoer {
     private static int anzahlZubehoer;
+    private static String beschreibung;
     private int zubehoerNummer;
     private String artikelName;
-    private String artikelNummer;
-    private String beschreibung;
+    private String artikelNummer;    
     private Artikelgruppe artikelGruppe;
     
     /**
@@ -149,7 +149,7 @@ abstract class Zubehoer {
         if (beschreibung == null) {
             throw new NullPointerException("Keine Beschreibung vorhanden!");
         } else {
-            this.beschreibung = beschreibung;
+            Zubehoer.beschreibung = beschreibung;
         }
     }
     

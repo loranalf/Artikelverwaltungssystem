@@ -256,31 +256,31 @@ public class ZubehoerVerwaltung {
         for (Klebespray k: klebeSprayListe) {
             ausgabe += "\n" + k.toString() + "\n";
         }
-        /*
+        
         ausgabe+= "\nVliesliste: \n";
         for (Vlies v : vliesListe) {
-            ausgabe += v.toString() + "\n";
+            ausgabe += "\n" + v.toString() + "\n";
         }
         
         ausgabe +="\nNadelliste: \n";
         for (Nadeln n : nadelListe) {
-            ausgabe += n.toString() + "\n";
+            ausgabe += "\n" + n.toString() + "\n";
         }
                 
         ausgabe += "\nNadelölliste: \n";
         for (Nadeloel no: nadelOelListe) {
-            ausgabe += no.toString() + "\n";
+            ausgabe += "\n" + no.toString() + "\n";
         }
         
         ausgabe += "\nSprühölliste: \n";
         for (Spruehoel sp : spruehOelListe) {
-            ausgabe += sp.toString() + "\n";
+            ausgabe += "\n" + sp.toString() + "\n";
         }
         
         ausgabe += "\nLagerfettliste: \n";
         for (Lagerfett l : lagerFettListe) {
-            ausgabe += l.toString() + "\n";
-        }*/
+            ausgabe += "\n" + l.toString() + "\n";
+        }
         ausgabe += "***********************************************";
         
         return ausgabe;
