@@ -251,36 +251,36 @@ public class ZubehoerVerwaltung {
      */
     @Override
     public String toString() {
-        String ausgabe = "***********************************************\nKlebesprayliste: \n";
+        String ausgabe = "***********************************************\nKlebesprayliste: \n\n";
         
         for (Klebespray k: klebeSprayListe) {
-            ausgabe += k.toString() + "\n";
+            ausgabe += "\n" + k.toString() + "\n";
         }
-        
-        ausgabe+= "Vliesliste: \n";
+        /*
+        ausgabe+= "\nVliesliste: \n";
         for (Vlies v : vliesListe) {
             ausgabe += v.toString() + "\n";
         }
         
-        ausgabe +="Nadelliste: \n";
+        ausgabe +="\nNadelliste: \n";
         for (Nadeln n : nadelListe) {
             ausgabe += n.toString() + "\n";
         }
                 
-        ausgabe += "Nadelölliste: \n";
+        ausgabe += "\nNadelölliste: \n";
         for (Nadeloel no: nadelOelListe) {
             ausgabe += no.toString() + "\n";
         }
         
-        ausgabe += "Sprühölliste: \n";
+        ausgabe += "\nSprühölliste: \n";
         for (Spruehoel sp : spruehOelListe) {
             ausgabe += sp.toString() + "\n";
         }
         
-        ausgabe += "Lagerfettliste: \n";
+        ausgabe += "\nLagerfettliste: \n";
         for (Lagerfett l : lagerFettListe) {
             ausgabe += l.toString() + "\n";
-        }
+        }*/
         ausgabe += "***********************************************";
         
         return ausgabe;
