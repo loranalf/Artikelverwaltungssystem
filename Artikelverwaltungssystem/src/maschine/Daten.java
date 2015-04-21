@@ -191,7 +191,11 @@ class Daten {
         }
     }
     
-    
+    /**
+     * Liefert die Daten des Objektes.
+     * @return die Daten des Objektes
+     * @since 1.00
+     */
     @Override
     public String toString() {
         return  "Gewicht: " + getGewicht() + "kg\n" + 
